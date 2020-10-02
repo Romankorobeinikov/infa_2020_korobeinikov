@@ -34,8 +34,8 @@ def face(x, eye_color, skin_color, hair_color):
     circle(screen, (0, 0, 0), (x - 42, 300 - 20), 7)
     circle(screen, (0, 0, 0), (x + 42, 300 - 20), 7)
     # hair
-    for alpha in range(5, 27):
-        alpha_0 = alpha / 10
+    for i in range(5, 27):
+        alpha_0 = i / 10
         polygon(screen, hair_color,
                 [(x - (125 + 30) * math.cos(alpha_0), 300 - (125 + 30) * math.sin(alpha_0)),
                  (x - (125 - 7) * math.cos(alpha_0) + 10 * math.sin(alpha_0),
@@ -45,10 +45,10 @@ def face(x, eye_color, skin_color, hair_color):
 
 
 def message(x):
-    rect(screen, (0, 200, 0), (x - 330, 60, 600, 70))
+    rect(screen, (0, 200, 0), (x - 600, 60, 1100, 70))
     font = pygame.font.SysFont('serif', 48)
-    text = font.render("PYTHON is AMAZING", 1, (0, 0, 0))
-    screen.blit(text, (x - 250, 70))
+    text = font.render("PYTHON is REALLY AMAZING!!!", 1, (0, 0, 0))
+    screen.blit(text, (x - 400, 70))
 
 
 def boy(x, body_color, hair_color, eye_color, skin_color):
@@ -56,9 +56,10 @@ def boy(x, body_color, hair_color, eye_color, skin_color):
     face(x, eye_color, skin_color, hair_color)
 
 
-screen = pygame.display.set_mode((800, 500))
-boy(450, (255, 151, 95), (255, 80, 255), (0, 178, 255), (255, 246, 207))
-message(450)
+screen = pygame.display.set_mode((1500, 500))
+boy(450, (0, 184, 0), (229, 255, 0), (143, 255, 228), (255, 246, 207))
+boy(950, (255, 151, 95), (255, 80, 255), (0, 178, 255), (255, 246, 207))
+message(700)
 pygame.display.update()
 clock = pygame.time.Clock()
 
