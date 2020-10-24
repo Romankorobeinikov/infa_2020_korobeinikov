@@ -7,6 +7,12 @@ pygame.init()
 
 
 def body(scr, x, skin_color, body_color):
+    """
+    draws a body
+    :param scr: surface of display on which the picture is
+    :param x: x-coord of the performance' center
+    :return: none
+    """
     ellipse(scr, body_color, (x - 150, 400, 300, 200))
     # hands
     polygon(scr, skin_color, [(x - 159, 435), (x - 295, 158), (x - 267, 155), (x - 134, 404)])
@@ -22,6 +28,11 @@ def body(scr, x, skin_color, body_color):
 
 
 def face(scr, x, eye_color, skin_color, hair_color):
+    """
+    draws a face
+    :param scr: surface of display on which the picture is
+    :param x: x-coord of the performance' center
+    """
     circle(scr, skin_color, (x, 300), 125)
     # mouth
     polygon(scr, (255, 0, 0, alpha), [(x, 300 + 75), (x - 50, 300 + 40), (x + 50, 300 + 40)])
@@ -46,6 +57,11 @@ def face(scr, x, eye_color, skin_color, hair_color):
 
 
 def boy(scr, x, body_color, hair_color, eye_color, skin_color):
+    """
+    draws a face
+    :param scr: surface of display on which the picture is
+    :param x: x-coord of the performance' center
+    """
     body(scr, x, skin_color, body_color)
     face(scr, x, eye_color, skin_color, hair_color)
 
@@ -56,7 +72,7 @@ start = 400
 end = 100
 screen = pygame.display.set_mode((width, 500))
 boy_surf = pygame.Surface((650, 500), pygame.SRCALPHA)
-a = width // (num_people + num_people**2)
+perspective = width // (num_people + num_people**2)
 poz1 = 0
 poz2 = width
 
@@ -67,13 +83,13 @@ for j in range(num_people):
     b = random.randint(0, 255)
     alpha = 255 * (1 - j / num_people)
     boy(boy_surf, 325, (r, b, g, alpha), (r, g, b, alpha), (143, 255, 228, alpha), (255, 246, 207, alpha))
-    poz2 -= a * (num_people - j)
-    screen.blit(pygame.transform.smoothscale(boy_surf, (a * (num_people - j), a * (num_people - j))),
-                (poz1, 100 + a * j))
+    poz2 -= perspective * (num_people - j)
+    screen.blit(pygame.transform.smoothscale(boy_surf, (perspective * (num_people - j), perspective * (num_people - j))),
+                (poz1, 100 + perspective * j))
     boy(boy_surf, 325, (g, r, b, alpha), (g, b, r, alpha), (143, 255, 228, alpha), (255, 246, 207, alpha))
-    screen.blit(pygame.transform.smoothscale(boy_surf, (a * (num_people - j), a * (num_people - j))),
-                (poz2, 100 + a * j))
-    poz1 += a * (num_people - j)
+    screen.blit(pygame.transform.smoothscale(boy_surf, (perspective * (num_people - j), perspective * (num_people - j))),
+                (poz2, 100 + perspective * j))
+    poz1 += perspective * (num_people - j)
 
 pygame.display.update()
 clock = pygame.time.Clock()
